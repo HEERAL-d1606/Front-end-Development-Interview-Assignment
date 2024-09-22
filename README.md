@@ -60,6 +60,7 @@ This is a React-based application designed to manage webinars. It allows users t
 ## Technologies Used
 
 - **React**: JavaScript library for building user interfaces.
+- **Material-UI (MUI)**: React component library for building modern, responsive UI elements.
 - **dayjs**: Library for manipulating dates and times.
 - **CSS/SCSS**: Used for styling the application.
 - **Vercel**: Used for deployment of the application.
