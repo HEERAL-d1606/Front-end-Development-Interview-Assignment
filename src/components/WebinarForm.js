@@ -14,7 +14,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import { BootstrapInput } from '../style/CustomizedInputsStyled';
-// import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
+
 
 const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
   const [formData, setFormData] = useState({
