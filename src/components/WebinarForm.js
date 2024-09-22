@@ -90,21 +90,24 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
     endTime: "",
   };
 
+  const handleCancel = () => {
+    setFormData(initialFormState); // Reset form fields
+    setUploadedImage(null); // Reset uploaded image
+    onClose(); // Close the dialog
+    setErrors({}); // Reset errors
+  };
+  
   useEffect(() => {
     if (initialValues && open) {
-      setFormData(initialValues); // Set form with initial values if passed
+      setFormData(initialValues);  // Set form with initial values if passed
       setErrors({});
     } else if (!open) {
-      setFormData(initialFormState); // Reset form when the dialog closes
-      setErrors({});
+      setFormData(initialFormState);  // Reset form when the dialog closes
+      setUploadedImage(null); // Reset uploaded image when closed
+      setErrors({}); // Reset errors when closed
     }
   }, [initialValues, open]);
-
-  const handleCancel = () => {
-    setFormData(initialFormState); // Reset form
-    onClose(); // Close the dialog
-    setErrors({});
-  };
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -318,7 +321,7 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
                 marginBottom: "4px",
                 marginTop: "8px",
               }}
-              onClick={() => document.getElementById("fileInput").click()} // Trigger file input
+              
             >
               {uploadedImage ? (
                 <>
