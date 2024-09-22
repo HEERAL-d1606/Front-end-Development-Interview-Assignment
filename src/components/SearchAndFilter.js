@@ -64,21 +64,21 @@ const SearchAndFilter = ({ onSearch, onFilter, topics }) => {
           height: "41px",
           backgroundColor: "#FFFFFF",
 
-          borderRadius: "10px", // Rounded corners
+          borderRadius: "10px",
           "& .MuiSelect-select": {
-            padding: "10px 14px", // Adjust padding for better appearance
-            color: "#2E333B", // Text color for selected value
+            padding: "10px 14px",
+            color: "#2E333B",
           },
           "& .MuiMenuItem-root": {
-            fontSize: "18px", // Font size for dropdown items
-            color: "#2E333B", // Text color for dropdown items
+            fontSize: "18px",
+            color: "#2E333B",
           },
           "&:before, &:after": {
-            borderColor: "#E3E7EC", // Border color for the select
+            borderColor: "#E3E7EC",
           },
         }}
       >
-        <MenuItem value="">All</MenuItem> 
+        <MenuItem value="">All</MenuItem>
         {topics.map((topics, index) => (
           <MenuItem key={index} value={topics}>
             {topics}

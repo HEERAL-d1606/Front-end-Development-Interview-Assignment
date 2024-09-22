@@ -66,7 +66,7 @@ export const mockWebinars = [
     instructorRole: 'Data Scientist',
     instructorCompany: 'Data World',
     instructorImageURL: require('../assets/Rectangle.png'),
-    topics: 'Design',
+    topics: 'Data Science',
     startDate: '2024-10-12', 
     startTime: '11:00', 
     endTime: '13:30',

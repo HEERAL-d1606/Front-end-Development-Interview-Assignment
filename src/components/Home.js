@@ -6,6 +6,11 @@ import WebinarForm from "./WebinarForm";
 import { mockWebinars, topicsList } from "../data/mockData";
 import dayjs from "dayjs";
 
+/**
+  The Home component manages the display and filtering of webinars, handling user interactions for searching
+  and displaying webinar details.
+ */
+
 const App = () => {
   const [webinars, setWebinars] = useState(mockWebinars);
   const [searchQuery, setSearchQuery] = useState("");
@@ -72,14 +77,26 @@ const App = () => {
   const filteredWebinars = webinars.filter(
     (webinar) =>
       (webinar.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        webinar.instructorName.toLowerCase().includes(searchQuery.toLowerCase())||
-        webinar.instructorRole.toLowerCase().includes(searchQuery.toLowerCase())||
-        webinar.instructorCompany.toLowerCase().includes(searchQuery.toLowerCase())||
-        webinar.topics.toLowerCase().includes(searchQuery.toLowerCase())||
-        dayjs(webinar.startDate).format("dddd MMMM DD").toLowerCase().includes(searchQuery.toLowerCase())||
-        convertTo12HourFormat(webinar.startTime).toLowerCase().includes(searchQuery.toLowerCase()) || // Search by formatted start time
-        convertTo12HourFormat(webinar.endTime).toLowerCase().includes(searchQuery.toLowerCase()) // Search by formatted end time
-      ) &&
+        webinar.instructorName
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        webinar.instructorRole
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        webinar.instructorCompany
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        webinar.topics.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        dayjs(webinar.startDate)
+          .format("dddd MMMM DD")
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        convertTo12HourFormat(webinar.startTime)
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) || // Search by formatted start time
+        convertTo12HourFormat(webinar.endTime)
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())) && // Search by formatted end time
       (selectedTopics ? webinar.topics === selectedTopics : true)
   );
 

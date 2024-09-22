@@ -13,8 +13,13 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-import { BootstrapInput } from '../style/CustomizedInputsStyled';
+import { BootstrapInput } from "../style/CustomizedInputsStyled";
 
+/*
+The WebinarForm component is a React dialog for adding or editing webinar details.
+ It manages state for form data, validation errors, and image uploads, featuring structured sections for
+ instructor and webinar information, validation for required fields, and submission logic to integrate 
+ with an external handler for webinars. */
 
 const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
   const [formData, setFormData] = useState({
@@ -37,14 +42,14 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
   const handleIconChange = (event) => {
     const file = event.target.files[0]; // Get the first file from the input
     if (file) {
-     const imageUrl = URL.createObjectURL(file); // Create a preview URL for the image
-  
+      const imageUrl = URL.createObjectURL(file); // Create a preview URL for the image
+
       // Update the uploaded image state
       setUploadedImage({
         file, // Store the file
         url: imageUrl, // Store the image preview URL
       });
-  
+
       // Update the formData with the new image URL
       setFormData((prevFormData) => ({
         ...prevFormData, // Spread the previous formData to keep other values
@@ -52,7 +57,6 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
       }));
     }
   };
-  
 
   useEffect(() => {
     if (initialValues) {
@@ -64,7 +68,7 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
         instructorRole: "",
         instructorCompany: "",
         topics: "",
-         instructorImageURL: "",
+        instructorImageURL: "",
         title: "",
         startDate: "",
         startTime: "",
@@ -79,7 +83,7 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
     instructorRole: "",
     instructorCompany: "",
     topics: "",
-     instructorImageURL: "",
+    instructorImageURL: "",
     title: "",
     startDate: "",
     startTime: "",
@@ -88,34 +92,30 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
 
   useEffect(() => {
     if (initialValues && open) {
-      setFormData(initialValues);  // Set form with initial values if passed
+      setFormData(initialValues); // Set form with initial values if passed
       setErrors({});
     } else if (!open) {
-      setFormData(initialFormState);  // Reset form when the dialog closes
+      setFormData(initialFormState); // Reset form when the dialog closes
       setErrors({});
     }
   }, [initialValues, open]);
-  
 
   const handleCancel = () => {
-    setFormData(initialFormState);  // Reset form
-    onClose();  // Close the dialog
+    setFormData(initialFormState); // Reset form
+    onClose(); // Close the dialog
     setErrors({});
   };
-  
-  
-  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-  
+
     if (name === "startDate") {
       const selectedDate = new Date(value);
       const today = new Date();
-  
+
       // Reset time to midnight for comparison
       today.setHours(0, 0, 0, 0);
-  
+
       // Check if the selected date is in the past
       if (selectedDate < today) {
         setErrors((prevErrors) => ({
@@ -130,14 +130,13 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
         }));
       }
     }
-  
+
     // Update formData
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
-  
 
   const validate = () => {
     const newErrors = {};
@@ -147,32 +146,30 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
     if (!formData.topics) newErrors.topics = "Required.";
     if (!formData.title) newErrors.title = "Required.";
     if (!formData.startDate) newErrors.startDate = "Required.";
-    if (formData.startDate < today) newErrors.startDate = "Please select a valid date.";
+    if (formData.startDate < today)
+      newErrors.startDate = "Please select a valid date.";
     if (!formData.startTime) newErrors.startTime = "Required.";
     if (!formData.endTime) newErrors.endTime = "Required.";
     return newErrors;
   };
 
- const handleSubmit = () => {
-  const validationErrors = validate();
-  if (Object.keys(validationErrors).length > 0) {
-    setErrors(validationErrors); // Set validation errors
-  } else {
-    // Prepare the form data
-    const newWebinar = {
-      ...formData,
-      id: formData.id, // Ensure unique ID
-       instructorImageURL: formData. instructorImageURL, // Include the image
-      
-    };
-    
+  const handleSubmit = () => {
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors); // Set validation errors
+    } else {
+      // Prepare the form data
+      const newWebinar = {
+        ...formData,
+        id: formData.id, // Ensure unique ID
+        instructorImageURL: formData.instructorImageURL, // Include the image
+      };
 
-    // Call the onSubmit prop to handle adding the webinar
-    onSubmit(newWebinar);
-    onClose(); // Close the form dialog
-  }
-};
-
+      // Call the onSubmit prop to handle adding the webinar
+      onSubmit(newWebinar);
+      onClose(); // Close the form dialog
+    }
+  };
 
   return (
     <Dialog
@@ -198,17 +195,38 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
           >
             {formData.id ? "Edit Webinar" : "Create Webinar"}
           </Typography>
-          <IconButton style={{ color: "#444952" }} onClick={onClose} onClose={handleCancel} edge="end">
+          <IconButton
+            style={{ color: "#444952" }}
+            onClick={onClose}
+            onClose={handleCancel}
+            edge="end"
+          >
             <CloseIcon />
           </IconButton>
         </Box>
-        <hr style={{ border: "1px solid #E3E7EC", margin: "8px 0", width: "100%" }} />
+        <hr
+          style={{
+            border: "1px solid #E3E7EC",
+            margin: "8px 0",
+            width: "100%",
+          }}
+        />
       </DialogTitle>
       <DialogContent>
         {/* Instructor Details Section */}
         <Box display="flex" alignItems="center">
-          <PeopleAltOutlinedIcon style={{ marginRight: "8px", height: "24px", width: "24px", color: "#444952" }} />
-          <Typography variant="h6" style={{ fontWeight: 600, fontSize: "18px", color: "#2E333B" }}>
+          <PeopleAltOutlinedIcon
+            style={{
+              marginRight: "8px",
+              height: "24px",
+              width: "24px",
+              color: "#444952",
+            }}
+          />
+          <Typography
+            variant="h6"
+            style={{ fontWeight: 600, fontSize: "18px", color: "#2E333B" }}
+          >
             Instructor Details
           </Typography>
         </Box>
@@ -217,7 +235,15 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
           <Grid item xs={12} sm={6}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Typography variant="subtitle1" style={{ fontWeight: 600, fontSize: "13px", color: "#2E333B", marginBottom: "8px" }}>
+                <Typography
+                  variant="subtitle1"
+                  style={{
+                    fontWeight: 600,
+                    fontSize: "13px",
+                    color: "#2E333B",
+                    marginBottom: "8px",
+                  }}
+                >
                   Instructor Name<span style={{ color: "red" }}>*</span>
                 </Typography>
                 <BootstrapInput
@@ -236,7 +262,15 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
                 )}
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="subtitle1" style={{ fontWeight: 600, fontSize: "13px", color: "#2E333B", marginBottom: "8px" }}>
+                <Typography
+                  variant="subtitle1"
+                  style={{
+                    fontWeight: 600,
+                    fontSize: "13px",
+                    color: "#2E333B",
+                    marginBottom: "8px",
+                  }}
+                >
                   Instructor Role<span style={{ color: "red" }}>*</span>
                 </Typography>
                 <BootstrapInput
@@ -258,66 +292,102 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
           </Grid>
 
           <Grid item xs={12} sm={6}>
-      <Typography variant="subtitle1" style={{ fontWeight: 600, fontSize: "13px", color: "#2E333B", marginBottom: "8px" }}>
-        Instructor Image
-      </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "120px", // Adjust the size as needed
-          height: "120px",
-          borderRadius: "8px",
-          backgroundColor: "#F2F4F8", // Light gray background
-          border: "2px dashed #D9DBDC", // Dashed border
-          cursor: "pointer",
-          position: "relative", // So we can position the input
-          marginBottom: "4px",
-          marginTop: "8px"
-        }}
-        onClick={() => document.getElementById("fileInput").click()} // Trigger file input
-      >
-        {uploadedImage ? (
-          <>
-            {/* Show uploaded image */}
-            <img
-              src={uploadedImage.url}
-              alt="Instructor"
-              style={{ width: "100%", height: "100%", borderRadius: "8px", objectFit: "cover" }}
-            />
-            <Typography variant="body2" style={{ color: "#2E333B", position: "absolute", bottom: "-24px", fontSize: "12px" }}>
-              {uploadedImage.file.name || "Uploaded"}
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 600,
+                fontSize: "13px",
+                color: "#2E333B",
+                marginBottom: "8px",
+              }}
+            >
+              Instructor Image
             </Typography>
-          </>
-        ) : (
-          <Typography variant="h4" style={{ color: "#444952", fontSize: "36px", fontWeight: "bold" }}>
-            +
-          </Typography>
-        )}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "120px", // Adjust the size as needed
+                height: "120px",
+                borderRadius: "8px",
+                backgroundColor: "#F2F4F8", // Light gray background
+                border: "2px dashed #D9DBDC", // Dashed border
+                cursor: "pointer",
+                position: "relative", // So we can position the input
+                marginBottom: "4px",
+                marginTop: "8px",
+              }}
+              onClick={() => document.getElementById("fileInput").click()} // Trigger file input
+            >
+              {uploadedImage ? (
+                <>
+                  {/* Show uploaded image */}
+                  <img
+                    src={uploadedImage.url}
+                    alt="Instructor"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: "8px",
+                      objectFit: "cover",
+                    }}
+                  />
+                  <Typography
+                    variant="body2"
+                    style={{
+                      color: "#2E333B",
+                      position: "absolute",
+                      bottom: "-24px",
+                      fontSize: "12px",
+                    }}
+                  >
+                    {uploadedImage.file.name || "Uploaded"}
+                  </Typography>
+                </>
+              ) : (
+                <Typography
+                  variant="h4"
+                  style={{
+                    color: "#444952",
+                    fontSize: "36px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  +
+                </Typography>
+              )}
 
-        {/* Hidden file input */}
-        <input
-          type="file"
-          id="fileInput"
-          name="instructorImageURL"
-          accept="image/*"
-          onChange={handleIconChange}
-          style={{
-            opacity: 0,
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            cursor: "pointer",
-          }}
-        />
-      </Box>
-    </Grid>
+              {/* Hidden file input */}
+              <input
+                type="file"
+                id="fileInput"
+                name="instructorImageURL"
+                accept="image/*"
+                onChange={handleIconChange}
+                style={{
+                  opacity: 0,
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  cursor: "pointer",
+                }}
+              />
+            </Box>
+          </Grid>
 
           <Grid item xs={12} sm={6}>
-            <Typography variant="subtitle1" style={{ fontWeight: 600, fontSize: "13px", color: "#2E333B", marginBottom: "8px" }}>
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 600,
+                fontSize: "13px",
+                color: "#2E333B",
+                marginBottom: "8px",
+              }}
+            >
               Instructor Company<span style={{ color: "red" }}>*</span>
             </Typography>
             <BootstrapInput
@@ -331,13 +401,23 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
             />
             {errors.instructorCompany && (
               <Typography color="red" style={{ fontSize: "12px" }}>
-                {errors.instructorCompany.length > 25 ? `${errors.instructorCompany.slice(0, 25)}...` : errors.instructorCompany}
+                {errors.instructorCompany.length > 25
+                  ? `${errors.instructorCompany.slice(0, 25)}...`
+                  : errors.instructorCompany}
               </Typography>
             )}
           </Grid>
 
           <Grid item xs={12} sm={6}>
-            <Typography variant="subtitle1" style={{ fontWeight: 600, fontSize: "13px", color: "#2E333B", marginBottom: "8px" }}>
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 600,
+                fontSize: "13px",
+                color: "#2E333B",
+                marginBottom: "8px",
+              }}
+            >
               Topics<span style={{ color: "red" }}>*</span>
             </Typography>
             <BootstrapInput
@@ -359,8 +439,18 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
 
         {/* Webinar Details Section */}
         <Box display="flex" alignItems="center" style={{ marginTop: "20px" }}>
-          <VideocamOutlinedIcon style={{ marginRight: "8px", height: "24px", width: "24px", color: "#444952" }} />
-          <Typography variant="h6" style={{ fontWeight: 600, fontSize: "18px", color: "#2E333B" }}>
+          <VideocamOutlinedIcon
+            style={{
+              marginRight: "8px",
+              height: "24px",
+              width: "24px",
+              color: "#444952",
+            }}
+          />
+          <Typography
+            variant="h6"
+            style={{ fontWeight: 600, fontSize: "18px", color: "#2E333B" }}
+          >
             Webinar Details
           </Typography>
         </Box>
@@ -368,7 +458,15 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
         {/* Wrap Webinar Details in Grid */}
         <Grid container spacing={2} p={4}>
           <Grid item xs={12}>
-            <Typography variant="subtitle1" style={{ fontWeight: 600, fontSize: "13px", color: "#2E333B", marginBottom: "8px" }}>
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 600,
+                fontSize: "13px",
+                color: "#2E333B",
+                marginBottom: "8px",
+              }}
+            >
               Webinar Title<span style={{ color: "red" }}>*</span>
             </Typography>
             <BootstrapInput
@@ -387,7 +485,15 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
           </Grid>
 
           <Grid item xs={12} sm={4}>
-            <Typography variant="subtitle1" style={{ fontWeight: 600, fontSize: "13px", color: "#2E333B", marginBottom: "8px" }}>
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 600,
+                fontSize: "13px",
+                color: "#2E333B",
+                marginBottom: "8px",
+              }}
+            >
               Start Date<span style={{ color: "red" }}>*</span>
             </Typography>
             <BootstrapInput
@@ -410,7 +516,15 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
           </Grid>
 
           <Grid item xs={12} sm={4}>
-            <Typography variant="subtitle1" style={{ fontWeight: 600, fontSize: "13px", color: "#2E333B", marginBottom: "8px" }}>
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 600,
+                fontSize: "13px",
+                color: "#2E333B",
+                marginBottom: "8px",
+              }}
+            >
               Start Time<span style={{ color: "red" }}>*</span>
             </Typography>
             <BootstrapInput
@@ -433,7 +547,15 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
           </Grid>
 
           <Grid item xs={12} sm={4}>
-            <Typography variant="subtitle1" style={{ fontWeight: 600, fontSize: "13px", color: "#2E333B", marginBottom: "8px" }}>
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 600,
+                fontSize: "13px",
+                color: "#2E333B",
+                marginBottom: "8px",
+              }}
+            >
               End Time<span style={{ color: "red" }}>*</span>
             </Typography>
             <BootstrapInput
@@ -455,10 +577,11 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
             )}
           </Grid>
         </Grid>
-
       </DialogContent>
       <hr style={{ border: "1px solid #E3E7EC", margin: "4px" }} />
-      <DialogActions sx={{ justifyContent: "flex-start", padding: "16px 24px" }}>
+      <DialogActions
+        sx={{ justifyContent: "flex-start", padding: "16px 24px" }}
+      >
         {/* Save/Create Button */}
         <Button
           onClick={handleSubmit}
@@ -470,7 +593,7 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
             color: "#FFFFFF",
             textTransform: "none",
             opacity: 1,
-            '&:hover': {
+            "&:hover": {
               backgroundColor: "#0D47A1",
             },
           }}

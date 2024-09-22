@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Typography, Box } from "@mui/material";
 
 /**
- This code inclued the LOGO - WEBINAR and the BUTTON- Add Webinar
+ This code inclued the LOGO - WEBINAR and the BUTTON- Add Webinar which lets you create a new WebinarCard
  */
 
 const Header = ({ onAdd }) => {
@@ -23,8 +23,8 @@ const Header = ({ onAdd }) => {
           fontWeight: 600,
           lineHeight: "28px",
           textAlign: "left",
-          color: "#0E1013", // Text color
-          backgroundColor: "transparent", // Keep background transparent
+          color: "#0E1013",
+          backgroundColor: "transparent",
         }}
       >
         Webinar

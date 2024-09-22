@@ -15,7 +15,7 @@ import dayjs from "dayjs";
   It also provides buttons for editing and deleting the webinar, enhancing user interactivity and management .
  */
 
-// Define an array of colors to be used for the cards
+// This is an array of colors to be used for the cards
 const cardColors = [
   "#741DE3",
   "#E72174",
@@ -57,10 +57,10 @@ const WebinarCard = ({ webinar, onEdit, onDelete }) => {
           mb={2}
           sx={{
             borderRadius: "16px",
-            backgroundColor: backgroundColor, // Use the chosen background color
+            backgroundColor: backgroundColor,
             padding: "22px",
             margin: "0px",
-            // boxShadow: 3,
+
             height: "125",
             width: "340",
           }}
@@ -115,7 +115,7 @@ const WebinarCard = ({ webinar, onEdit, onDelete }) => {
           {/* Right Side: Instructor's Image */}
           <Avatar
             alt={webinar.instructorName}
-            src={webinar.instructorImageURL} // URL for the instructor image
+            src={webinar.instructorImageURL}
             sx={{ width: 76, height: 76, borderRadius: 0 }}
           />
         </Box>
@@ -168,7 +168,7 @@ const WebinarCard = ({ webinar, onEdit, onDelete }) => {
 
                 borderRadius: "24px",
                 backgroundColor: "#F9E8E8",
-                color: "#D14040", // This sets the font color
+                color: "#D14040",
               }}
             >
               Delete
