@@ -9,11 +9,14 @@ import {
   Typography,
   IconButton,
   Box,
+  MenuItem,
+  Menu,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import { BootstrapInput } from "../style/CustomizedInputsStyled";
+import { topicsList } from "../data/mockData"; // Import topics list
 
 /*
 The WebinarForm component is a React dialog for adding or editing webinar details.
@@ -38,6 +41,7 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
   const [errors, setErrors] = useState({}); // State for validation errors
   const [uploadedImage, setUploadedImage] = useState(null);
   const today = new Date().toISOString().split("T")[0];
+  const [anchorEl, setAnchorEl] = useState(null); // Dropdown anchor
 
   const handleIconChange = (event) => {
     const file = event.target.files[0]; // Get the first file from the input
@@ -96,18 +100,17 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
     onClose(); // Close the dialog
     setErrors({}); // Reset errors
   };
-  
+
   useEffect(() => {
     if (initialValues && open) {
-      setFormData(initialValues);  // Set form with initial values if passed
+      setFormData(initialValues); // Set form with initial values if passed
       setErrors({});
     } else if (!open) {
-      setFormData(initialFormState);  // Reset form when the dialog closes
+      setFormData(initialFormState); // Reset form when the dialog closes
       setUploadedImage(null); // Reset uploaded image when closed
       setErrors({}); // Reset errors when closed
     }
   }, [initialValues, open]);
-  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -172,6 +175,22 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
       onSubmit(newWebinar);
       onClose(); // Close the form dialog
     }
+  };
+
+  const handleTopicClick = (event) => {
+    setAnchorEl(event.currentTarget); // Set anchor for dropdown
+  };
+
+  const handleCloseDropdown = () => {
+    setAnchorEl(null);
+  };
+
+  const handleSelectTopic = (topic) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      topics: topic, // Set selected topic
+    }));
+    handleCloseDropdown(); // Close the dropdown
   };
 
   return (
@@ -321,7 +340,6 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
                 marginBottom: "4px",
                 marginTop: "8px",
               }}
-              
             >
               {uploadedImage ? (
                 <>
@@ -429,14 +447,32 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
               sx={{ height: "40px" }} // Reduced height
               fullWidth
               margin="normal"
+              onClick={handleTopicClick} // Open dropdown on click
               value={formData.topics}
-              onChange={handleChange}
+              readOnly // Prevent typing
             />
             {errors.topics && (
               <Typography color="red" style={{ fontSize: "12px" }}>
                 {errors.topics}
               </Typography>
             )}
+
+            {/* Dropdown Menu */}
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleCloseDropdown}
+            >
+              {topicsList.map((topic) => (
+                <MenuItem
+                  key={topic}
+                  onClick={() => handleSelectTopic(topic)}
+                  style={{ fontSize: "12px" }}
+                >
+                  {topic}
+                </MenuItem>
+              ))}
+            </Menu>
           </Grid>
         </Grid>
 

@@ -78,9 +78,9 @@ const SearchAndFilter = ({ onSearch, onFilter, topics }) => {
           },
         }}
       >
-        <MenuItem value="">All</MenuItem>
+        <MenuItem value="" style={{ fontSize: "12px" }}>All</MenuItem>
         {topics.map((topics, index) => (
-          <MenuItem key={index} value={topics}>
+          <MenuItem key={index} value={topics} style={{ fontSize: "12px" }}>
             {topics}
           </MenuItem>
         ))}
