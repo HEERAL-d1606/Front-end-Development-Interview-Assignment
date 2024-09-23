@@ -116,7 +116,7 @@ const WebinarCard = ({ webinar, onEdit, onDelete }) => {
           <Avatar
             alt={webinar.instructorName}
             src={webinar.instructorImageURL}
-            sx={{ width: 76, height: 76, borderRadius: 0 }}
+            sx={{ width: 76, height: 76, borderRadius: 4 }}
           />
         </Box>
         {/* Webinar Details */}

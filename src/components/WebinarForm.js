@@ -330,9 +330,9 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                width: "120px", // Adjust the size as needed
+                width: "115px", // Adjust the size as needed
                 height: "120px",
-                borderRadius: "8px",
+                borderRadius: "24px",
                 backgroundColor: "#F2F4F8", // Light gray background
                 border: "2px dashed #D9DBDC", // Dashed border
                 cursor: "pointer",
@@ -350,7 +350,7 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
                     style={{
                       width: "100%",
                       height: "100%",
-                      borderRadius: "8px",
+                      borderRadius: "24px",
                       objectFit: "cover",
                     }}
                   />
@@ -359,6 +359,7 @@ const WebinarForm = ({ open, onClose, onSubmit, initialValues }) => {
                     style={{
                       color: "#2E333B",
                       position: "absolute",
+                      
                       bottom: "-24px",
                       fontSize: "12px",
                     }}
