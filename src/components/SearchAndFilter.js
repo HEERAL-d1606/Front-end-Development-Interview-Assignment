@@ -63,6 +63,7 @@ const SearchAndFilter = ({ onSearch, onFilter, topics }) => {
           width: { xs: "100%", sm: "220px" },
           height: "41px",
           backgroundColor: "#FFFFFF",
+          fontSize: "14px",
 
           borderRadius: "10px",
           "& .MuiSelect-select": {
@@ -78,7 +79,7 @@ const SearchAndFilter = ({ onSearch, onFilter, topics }) => {
           },
         }}
       >
-        <MenuItem value="" style={{ fontSize: "12px" }}>All</MenuItem>
+        <MenuItem value="" style={{ fontSize: "10px" }}>All</MenuItem>
         {topics.map((topics, index) => (
           <MenuItem key={index} value={topics} style={{ fontSize: "12px" }}>
             {topics}
