@@ -44,7 +44,7 @@ const WebinarCard = ({ webinar, onEdit, onDelete }) => {
         borderRadius: "24px",
         backgroundColor: "#ffffff",
         padding: "4px",
-
+        boxShadow:"3",
         outline: "#E3E7EC",
       }}
     >

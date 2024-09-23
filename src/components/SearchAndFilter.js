@@ -38,7 +38,9 @@ const SearchAndFilter = ({ onSearch, onFilter, topics }) => {
     >
       {/* Search Field */}
       <Box mb={{ xs: 2, sm: 0 }} mr={{ sm: 2 }}>
-        <Search>
+        <Search
+        sx={{borderRadius: "10px",}}
+        >
           <SearchIconWrapper>
             <SearchOutlinedIcon />
           </SearchIconWrapper>
