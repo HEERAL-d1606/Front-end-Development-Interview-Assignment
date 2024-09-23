@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# Webinar
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React-based application designed to manage webinars. It allows users to create, edit, delete, and search through a list of webinars, as well as filter webinars based on specific topics.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Create a webinar using a popup form with validation.
+- Add a webinar to a list after submission.
+- Edit an existing webinar, with auto-filled data in the form.
+- Delete a webinar from the list.
+- Filter webinars based on topics.
+- Search webinars by multiple fields (e.g., title, description, etc.).
+- Fully responsive UI designed as per the provided Figma design.
 
-### `npm start`
+## Key Functionalities
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1. **Create Webinar Form (with validation)**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- A form is displayed in a popup modal for creating a new webinar.
+- The form includes fields for the webinar name, description, date, time, and topics.
+- The form includes validation to ensure all required fields are filled.
 
-### `npm test`
+### 2. **Create Webinar Button**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- After filling out the form, clicking the "Create Webinar" button will add the new webinar to the list of webinars displayed on the homepage.
 
-### `npm run build`
+### 3. **Cancel Button**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Clicking the "Cancel" button on the form will reset all fields and close the popup without creating or editing a webinar.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 4. **Edit Webinar**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Each webinar in the list includes an "Edit" button that opens the form in the popup with the existing values pre-filled.
+- Users can update the webinar details and save changes.
 
-### `npm run eject`
+### 5. **Cancel Edit**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- While editing, the "Cancel" button will reset the form values to their original state and close the popup without saving any changes.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 6. **Delete Webinar**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Each webinar in the list includes a "Delete" button.
+- Clicking this button will remove the webinar from the list.
+- An alert message is displayed for the confirmation of deletion.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 7. **Extract Topics**
 
-## Learn More
+- Webinar topics are selected from a predefined list of topics available in the system.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 8. **Filter by Topic**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- A dropdown menu allows users to filter webinars based on their topic.
+- Also if there are no cards present for a specific topic, an alert message is displaye for that too.
 
-### Code Splitting
+### 9. **Search Functionality**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- The search bar allows users to search through webinars based on multiple fields (e.g., title, description, etc.).
+- The search is a multi-match query, meaning it looks for matches in all relevant fields.
 
-### Analyzing the Bundle Size
+## Technologies Used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **React**: JavaScript library for building user interfaces.
+- **Material-UI (MUI)**: React component library for building modern, responsive UI elements.
+- **dayjs**: Library for manipulating dates and times.
+- **CSS/SCSS**: Used for styling the application.
+- **Vercel**: Used for deployment of the application.
+  
+## Figma Design Reference
 
-### Making a Progressive Web App
+- The app UI is designed based on a Figma reference, Ensuring all UI components, spacing, and styles match the provided design.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Deployment Link
 
-### Advanced Configuration
+-https://front-end-development-interview-assignment-heeraldataulia.vercel.app/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
