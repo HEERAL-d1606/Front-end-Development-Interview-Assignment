@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Typography, Box } from "@mui/material";
 
 /**
- This code inclued the LOGO - WEBINAR and the BUTTON- Add Webinar which lets you create a new WebinarCard
+ * This code includes the LOGO - WEBINAR and the BUTTON- Add Webinar which lets you create a new WebinarCard
  */
 
 const Header = ({ onAdd }) => {
@@ -11,10 +11,12 @@ const Header = ({ onAdd }) => {
       display="flex"
       justifyContent="space-between"
       alignItems="center"
-      pl={5}
-      pr={5}
-      pt={2}
-      pb={2}
+      sx={{
+        pl: { xs: 1, sm: 5 }, // padding-left for screens < 375px is 1, else 5
+        pr: { xs: 1, sm: 5 }, // padding-right for screens < 375px is 1, else 5
+        pt: { xs: 2, sm: 2 }, // padding-top for all sizes is 2
+        pb: { xs: 2, sm: 2 }, // padding-bottom for all sizes is 2
+      }}
     >
       <Typography
         variant="h5"
